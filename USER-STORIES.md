@@ -1,19 +1,5 @@
 # BLOGGER
 
-## Technologies used:
-
->* Flask framework
->* Python
->* Html, css for templates in frontend
->* Database used: Postgresql
-
----
-
-## Er diagram for the project:
-![Erdiagram](./erdiagram.png)
-
----
-
 ## Personas
 
 >* <strong>User as a blogger: </strong>An individual writing the blogs and managing it.
