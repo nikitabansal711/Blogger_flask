@@ -16,7 +16,7 @@
 > * delete his blog post.
 > * update his blog post.
 
-> ### User with roleof reader:
+> ### User with role of reader:
 > * see and read all posts.
 > * signup and change role to blogger.
 > * login and start accessing the site as a blogger.
