@@ -25,7 +25,7 @@
 ## User Stories
 
 > ### User with role of blogger:
-> * need to lgin with the credentials
+> * need to login with the credentials
 > * create a blog post.
 > * delete his blog post.
 > * update his blog post.
