@@ -41,7 +41,7 @@
  * run the command: ```python helper_data_loader.py``` to load sample data into database
  * run the command: ```flask run``` to run the server 
  * Now you have the access to the BLOGGER website
- * Sample user credentials can be seen from <strong>user.csv</strong> file in data directory to access their blogs and perfrom CRUD      operations
+ * Sample user credentials can be seen from <strong>sample_users.txt</strong> file to access their blogs and perfrom CRUD operations
  * run command: ```python helper_drop_db.py``` to drop database
 ---
 
