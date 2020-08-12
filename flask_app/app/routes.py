@@ -177,7 +177,7 @@ def update_my_blog(blog_id):
     if not session.get("token") is None:
         user = session.get('user')
         blog = Blog.query.filter_by(blog_id=blog_id, blog_user_id=user["user_id"]).first()
-        form = UpdateForm()
+        form = UpdateForm(obj=blog)
         print("hi")
         if not blog:
             flash("No such blog found!")

@@ -20,7 +20,7 @@
     </title>
   </head>
   {% block content %}
-  <body style="margin-right: 10px; margin-left: 10px;">
+  <body>
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -33,7 +33,7 @@
             <a href="{{ url_for('dashboard') }}">Create Blog</a>
           </li>
           <li><a href="{{ url_for('show_my_blogs') }}">See my blogs</a></li>
-          <li><a href="{{ url_for('show_all_blogs') }}">Show all blogs</a></li>
+          <li><a href="{{ url_for('show_all_blogs') }}">Explore</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>
@@ -58,9 +58,9 @@
     </nav>
     <div
       class="container-fluid"
-      style="background-color: #F8F8FF; height: 100%;"
+      style="background-color:black; height: 100%;"
     >
-      <h2>
+      <h2 style="color: whitesmoke;">
         Good job <mark>{{ user.username }}!</mark> here you see your blogs
       </h2>
       <br />
@@ -70,12 +70,12 @@
           <div>
             <div class="content-flex"></div>
             <div>
-              <h3 class="style-h3"><mark>{{ blog.blog_title }}</mark></h3>
+              <h3 class="style-sub-h3">{{ blog.blog_title }}</h3>
             </div>
           </div>
           <div class="content-flex">
             <div>
-              <h4 class="style-sub-h3">{{ blog.blog_type }}</h4>
+              <h4 class="choosen-block">{{ blog.blog_type }}</h4>
             </div>
             <br />
           </div>
@@ -109,7 +109,6 @@
       <div class="row">
         <footer class="style-footer">
           <div class="container-fluid">
-            <h4><b>READ BLOGS! CREATE BLOGS!</b></h4>
             <br />
             <br />
             <p>

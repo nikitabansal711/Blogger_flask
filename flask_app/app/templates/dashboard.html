@@ -20,7 +20,7 @@
     </title>
   </head>
   {% block content %}
-  <body style="margin-right: 10px; margin-left: 10px;">
+  <body>
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -52,27 +52,31 @@
       </div>
     </nav>
     <div
-      class="container-fluid text-center bg"
-      style="height: 600px;"
+      class="container-fluid text-center"
+      style="height: 600px;
+            background-color: black;"
     >
-      <h1>Create a blog {{ user.username }}!</h1>
+      <h1 class="explore">Create a blog {{ user.username }}!</h1>
       <br />
       <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
-          {{ form.blog_title.label }}<br />
+          <div class="favorite">{{ form.blog_title.label }}</div>
           {{ form.blog_title }}
         </p>
+      <br>
         <p>
-          {{ form.blog_type.label }}<br />
+          <div class="favorite">{{ form.blog_type.label }}</div>
           {{ form.blog_type }}
         </p>
+        <br>
         <p>
-          {{ form.blog_desc.label }}<br />
+          <div class="favorite">{{ form.blog_desc.label }}</div>
           {{ form.blog_desc }}
         </p>
+        <br>
         <p>
-          {{ form.blog_content.label }}<br />
+          <div class="favorite">{{ form.blog_content.label }}</div>
           {{ form.blog_content }}
         </p>
         <p>{{ form.submit() }}</p>
@@ -87,7 +91,6 @@
       <div class="row">
         <footer class="style-footer">
           <div class="container-fluid">
-            <h4><b>READ BLOGS! CREATE BLOGS!</b></h4>
             <br />
             <br />
             <p>

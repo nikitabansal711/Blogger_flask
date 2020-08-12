@@ -19,35 +19,27 @@
       BLOGGER
     </title>
   </head>
-  <body class="style-body">
+  <body>
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="{{ url_for('home') }}"
-            ><strong>Blogger</strong></a
-          >
+          <a class="navbar-brand" href="{{ url_for('home') }}">BLOGGER</a>
         </div>
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="{{ url_for('signup') }}"
-              ><span class="glyphicon glyphicon-user"></span> Sign Up</a
-            >
-          </li>
-          <li>
-            <a href="{{ url_for('login') }}"
-              ><span class="glyphicon glyphicon-log-in"></span> Login</a
-            >
-          </li>
-          <li>
-            <a href="{{ url_for('log_out') }}"
-              ><img
-                class="img-responsive"
-                src="{{url_for('static', filename='logout.png')}}"
-                height="20"
-                width="20"
-            /></a>
-          </li>
-        </ul>
+        <div id="myNavbar">
+          <ul class="nav navbar-nav"></ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="{{ url_for('signup') }}"
+                ><span class="glyphicon glyphicon-user"></span> Sign Up</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('login') }}"
+                ><span class="glyphicon glyphicon-log-in"></span> Login</a
+              >
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
     <div
@@ -80,7 +72,7 @@
             "
           />
         </a>
-        <h3 style="margin-top: 40px; margin-right: 60px; color:#E6E6FA	;">
+        <h3 style="margin-top: 40px; margin-right: 60px; color: #e6e6fa;">
           <b>Read blogs, Create blogs</b>
         </h3>
 

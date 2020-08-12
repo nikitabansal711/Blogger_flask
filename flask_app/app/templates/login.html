@@ -20,7 +20,7 @@
     </title>
   </head>
   {% block content %}
-  <body style="margin-right: 10px; margin-left: 10px;">
+  <body>
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -50,20 +50,23 @@
       class="container-fluid text-center bg"
       style="height: 600px;"
     >
-      <h1>Sign In</h1>
+      <h1 class="explore">Sign In</h1>
       <br />
       <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
-          {{ form.username.label }}<br />
+          <div class="favorite">{{ form.username.label }}</div><br />
           {{ form.username(size=32) }}
         </p>
         <p>
-          {{ form.password.label }}<br />
+          <div class="favorite">{{ form.password.label }}</div><br />
           {{ form.password(size=32) }}
         </p>
-        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-        <p>{{ form.submit() }}</p>
+        <p>
+           {{ form.remember_me() }} 
+          {{ form.remember_me.label }}
+        </p>
+          <p>{{ form.submit() }}</p>
       </form>
       <div>
         {% with messages = get_flashed_messages() %} {% if messages %} {% for
@@ -76,7 +79,6 @@
         <footer class="style-footer" style="margin-top: 200px;"
         >
           <div class="container-fluid">
-            <h4><b>READ BLOGS! CREATE BLOGS!</b></h4>
             <br />
             <br />
             <p>
