@@ -29,48 +29,52 @@
           >
         </div>
         <ul class="nav navbar-nav">
-          <li class="active"><a href="{{ url_for('login') }}">Login</a></li>
-          <li><a href="{{ url_for('signup') }}">Signup</a></li>
+          <li class="active">
+            <a href="{{ url_for('dashboard') }}">Create Blog</a>
+          </li>
+          <li><a href="{{ url_for('show_my_blogs') }}">See my blogs</a></li>
+          <li><a href="">Show all blogs</a></li>
         </ul>
       </div>
     </nav>
     <div
-      class="container-fluid text-center"
-      style="background-color: #5f9ea0; height: 600px;"
+      class="container-fluid"
+      style="background-color: whitesmoke; height: 100%;"
     >
-      <h1>Sign Up</h1>
+      <h2>Good job {{ user.username }}! here you see your blogs</h2>
       <br />
-      <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-          {{ form.user_name.label }}<br />
-          {{ form.user_name }}
-        </p>
-        <p>
-          {{ form.user_email.label }}<br />
-          {{ form.user_email }}
-        </p>
-        <p>
-          {{ form.user_address.label }}<br />
-          {{ form.user_address }}
-        </p>
-        <p>
-          {{ form.user_mobile.label }}<br />
-          {{ form.user_mobile }}
-        </p>
-        <p>
-          {{ form.password.label }}<br />
-          {{ form.password }}
-        </p>
-        <p>{{ form.submit() }}</p>
-        <div>
-          {% with messages = get_flashed_messages() %} {% if messages %} {% for
-          message in messages %}
-          <p>{{ message }}</p>
-          {% endfor %} {% endif %} {% endwith %}
+      {% for blog in blogs %}
+      <div
+        class="box"
+        style="
+          display: flex;
+          height: fit-content;
+          width: fit-content;
+          flex-direction: column;
+          margin-left: 10px;
+          box-shadow: 5px 10px 8px #888888;
+          margin-top: 20px;
+          background-color: yellowgreen;
+        "
+      >
+        Title: {{ blog.blog_title }}<br />
+        Type: {{ blog.blog_type }}<br />
+        Content: {{ blog.blog_type }}<br />
+        Description: {{ blog.blog_desc }}
+        <div class="flex_box" style="display: flex; justify-content: space-evenly;">
+        <img
+          class="img-responsive"
+          src="{{url_for('static', filename='delete.png')}}"
+          style="height: 20px; width: 20px; margin-top: 20px;"
+        /><img
+          class="img-responsive"
+          src="{{url_for('static', filename='edit.png')}}"
+          style="height: 20px; width: 20px; margin-top: 20px;"
+        />
         </div>
-      </form>
-      {% endblock %}
+      </div>
+      <br />
+      {% endfor %} {% endblock %}
       <div class="row">
         <footer
           style="
@@ -83,7 +87,7 @@
             background-color: #2f4f4f;
             color: black;
             text-align: center;
-            margin-top: 100px;
+            position: relative;
           "
         >
           <div class="container-fluid">

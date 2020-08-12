@@ -4,12 +4,12 @@ from app import db
 class User(db.Model):
     __tablename__ = 'user'
     user_id = db.Column(db.Integer, primary_key=True)
+    public_id = db.Column(db.String(2000), unique=True)
     user_name = db.Column(db.String(64), unique=True)
     user_email = db.Column(db.String(120), unique=True)
     user_address = db.Column(db.String(200))
-    user_mobile = db.Column(db.Integer)
-    password_hash = db.Column(db.String(128))
-    user_role_id = db.Column(db.Integer, db.ForeignKey('role.role_id'))
+    user_mobile = db.Column(db.String(10), unique=True)
+    password = db.Column(db.String(2000))
     blogs = db.relationship('Blog', backref='author', lazy='dynamic')
 
     def __repr__(self):
@@ -22,7 +22,7 @@ class Blog(db.Model):
     blog_title = db.Column(db.String(120))
     blog_type = db.Column(db.String(120))
     blog_desc = db.Column(db.Text())
-    bog_content = db.Column(db.Text())
+    blog_content = db.Column(db.Text())
     blog_user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
     def __repr__(self):

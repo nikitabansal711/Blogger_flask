@@ -18,6 +18,16 @@
     <title>
       BLOGGER
     </title>
+    <!-- <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const url = "http://127.0.0.1:5000/login";
+        console.log("qqqqQQQQQQQ");
+        fetch(url).then((data) => {
+            console.log("ddddddddds ====>", data, data.json());
+            // localStorage.setItem("token", data["tsoken"]);
+          });
+      });
+    </script> -->
   </head>
   {% block content %}
   <body style="margin-right: 10px; margin-left: 10px;">
@@ -29,9 +39,9 @@
           >
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="{{ url_for('login') }}">Login</a></li>
-            <li><a href="{{ url_for('signup') }}">Signup</a></li>
-          </ul>
+          <li class="active"><a href="{{ url_for('login') }}">Login</a></li>
+          <li><a href="{{ url_for('signup') }}">Signup</a></li>
+        </ul>
       </div>
     </nav>
     <div
@@ -39,7 +49,7 @@
       style="background-color: #5f9ea0; height: 600px;"
     >
       <h1>Sign In</h1>
-      <br>
+      <br />
       <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
@@ -54,9 +64,9 @@
         <p>{{ form.submit() }}</p>
       </form>
       {% endblock %}
-    <div class="row">
-      <footer
-      style="
+      <div class="row">
+        <footer
+          style="
             width: 100%;
             height: fit-content;
             max-width: top 10px;
@@ -68,33 +78,33 @@
             text-align: center;
             margin-top: 200px;
           "
-      >
-        <div class="container-fluid">
-          <h4><b>READ BLOGS! CREATE BLOGS!</b></h4>
-          <br />
-          <br />
-          <p>
-            <i
-              >A blog is an online diary or journal located on a website. The
-              content of a blog typically includes text, pictures, videos,
-              animated GIFs and even scans from old physical offline diaries or
-              journals and other hard copy documents. Since a blog can exist
-              merely for personal use, sharing information with an exclusive
-              group or to engage the public, a blog owner can set their blog for
-              private or public access.Blog content can appear as posts on one
-              continuous streaming page or posts on individual pages reachable
-              through one or more pages set up in a list-style format as post
-              title links, excerpts and related tags.
-            </i>
-          </p>
-          <small>Copyright &copy; Nikita Bansal</small>
-          <br />
-          <small>Contact us : 0120-88797987</small>
-          <br />
-          <small>Delhi, Panchsheel</small>
-        </div>
-      </footer>
-    </div>
+        >
+          <div class="container-fluid">
+            <h4><b>READ BLOGS! CREATE BLOGS!</b></h4>
+            <br />
+            <br />
+            <p>
+              <i
+                >A blog is an online diary or journal located on a website. The
+                content of a blog typically includes text, pictures, videos,
+                animated GIFs and even scans from old physical offline diaries
+                or journals and other hard copy documents. Since a blog can
+                exist merely for personal use, sharing information with an
+                exclusive group or to engage the public, a blog owner can set
+                their blog for private or public access.Blog content can appear
+                as posts on one continuous streaming page or posts on individual
+                pages reachable through one or more pages set up in a list-style
+                format as post title links, excerpts and related tags.
+              </i>
+            </p>
+            <small>Copyright &copy; Nikita Bansal</small>
+            <br />
+            <small>Contact us : 0120-88797987</small>
+            <br />
+            <small>Delhi, Panchsheel</small>
+          </div>
+        </footer>
+      </div>
     </div>
   </body>
 </html>

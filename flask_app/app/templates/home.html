@@ -31,12 +31,21 @@
     </nav>
     <div
       class="container-fluid"
-      style="background-color: #5f9ea0; height: 500px;"
+      style="background-color: #5f9ea0; height: 650px;"
     >
       <div class="row text-center">
         <h1 style="font-weight: bolder;">WELCOME TO BLOGGER!!</h1>
       </div>
       <br />
+      <div class="row text-center">
+        <img
+          class="img-responsive"
+          src="{{url_for('static', filename='blogger_logo.png')}}"
+          style="height: 100px; width: 100px; display: inline-block;
+          margin-top: 20px;"
+          align="middle"
+        />
+      </div>
       <div class="row text-center">
         {% block content %}
         <h2>Choose your role buddy!</h2>

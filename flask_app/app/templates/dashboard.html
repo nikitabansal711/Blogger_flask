@@ -29,8 +29,11 @@
           >
         </div>
         <ul class="nav navbar-nav">
-          <li class="active"><a href="{{ url_for('login') }}">Login</a></li>
-          <li><a href="{{ url_for('signup') }}">Signup</a></li>
+          <li class="active">
+            <a href="{{ url_for('dashboard') }}">Create Blog</a>
+          </li>
+          <li><a href="{{ url_for('show_my_blogs') }}">See my blogs</a></li>
+          <li><a href="">Show all blogs</a></li>
         </ul>
       </div>
     </nav>
@@ -38,29 +41,25 @@
       class="container-fluid text-center"
       style="background-color: #5f9ea0; height: 600px;"
     >
-      <h1>Sign Up</h1>
+      <h1>Create a blog buddy!</h1>
       <br />
       <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
-          {{ form.user_name.label }}<br />
-          {{ form.user_name }}
+          {{ form.blog_title.label }}<br />
+          {{ form.blog_title }}
         </p>
         <p>
-          {{ form.user_email.label }}<br />
-          {{ form.user_email }}
+          {{ form.blog_type.label }}<br />
+          {{ form.blog_type }}
         </p>
         <p>
-          {{ form.user_address.label }}<br />
-          {{ form.user_address }}
+          {{ form.blog_desc.label }}<br />
+          {{ form.blog_desc }}
         </p>
         <p>
-          {{ form.user_mobile.label }}<br />
-          {{ form.user_mobile }}
-        </p>
-        <p>
-          {{ form.password.label }}<br />
-          {{ form.password }}
+          {{ form.blog_content.label }}<br />
+          {{ form.blog_content }}
         </p>
         <p>{{ form.submit() }}</p>
         <div>
