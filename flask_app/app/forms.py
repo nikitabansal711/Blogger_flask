@@ -12,12 +12,6 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign In')
 
 
-class RoleForm(FlaskForm):
-    choice = RadioField(
-        'Role', choices=[('reader', 'Reader'), ('blogger', 'Blogger')])
-    submit = SubmitField('Proceed')
-
-
 class SignupForm(FlaskForm):
     user_name = StringField('Username', validators=[DataRequired()])
     user_email = EmailField('Email address', validators=[DataRequired(), Email()])
@@ -33,3 +27,11 @@ class BlogForm(FlaskForm):
     blog_desc = TextAreaField('Blog description', validators=[DataRequired()])
     blog_content = TextAreaField('Blog content', validators=[DataRequired()])
     submit = SubmitField('Create')
+
+
+class UpdateForm(FlaskForm):
+    blog_title = StringField('Title')
+    blog_type = StringField('Blog type')
+    blog_desc = TextAreaField('Blog description')
+    blog_content = TextAreaField('Blog content')
+    submit = SubmitField('update')

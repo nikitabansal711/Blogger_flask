@@ -5,22 +5,13 @@ from flask import render_template, redirect, url_for, flash, session
 from flask import jsonify, make_response
 from werkzeug.security import check_password_hash, generate_password_hash
 from app import app, db
-from app.forms import LoginForm, RoleForm, SignupForm, BlogForm
+from app.forms import LoginForm, SignupForm, BlogForm, UpdateForm
 from .models import User, Blog
 
 
 @app.route("/", methods=["post", "get"])
 def home():
-    form = RoleForm()
-    if form.validate_on_submit():
-        if form.choice.data == "blogger":
-            return redirect(url_for("login"))
-
-        # else:
-        # return redirect(url_for('show_blogs'))
-    else:
-        print(form.errors)
-    return render_template("home.html", form=form)
+    return render_template("home.html")
 
 
 @app.route("/login", methods=["post", "get"])
@@ -83,10 +74,6 @@ def signup():
     return render_template("signup.html", title="Sign In", form=form)
 
 
-# @app.route('/show_blogs')
-# def show_blogs():
-
-
 @app.route("/dashboard", methods=["post", "get"])
 def dashboard():
     if not session.get("token") is None:
@@ -104,13 +91,12 @@ def dashboard():
             db.session.commit()
             flash("New blog created with title {}".format(new_blog.blog_title))
 
-        return render_template("dashboard.html", form=form)
+        return render_template("dashboard.html", form=form, user=user)
     else:
-        flash("you are not logged in")
-        return redirect(url_for("login"))
+        return redirect(url_for('page_error'))
 
 
-@app.route("/log-out", methods=["post", "get"])
+@app.route("/log_out", methods=["post", "get"])
 def log_out():
     session.pop("token", None)
     return redirect(url_for("home"))
@@ -130,8 +116,88 @@ def show_my_blogs():
             blog_data['blog_content'] = blog.blog_content
             blog_data['blog_desc'] = blog.blog_desc
             output.append(blog_data)
-        print(output)
         return render_template("show_blogs.html", blogs=output, user=user)
     else:
         flash("you are not logged in buddy!")
-        return redirect(url_for("login"))
+        return redirect(url_for('page_error'))
+
+
+@app.route("/show_this_blog/<blog_id>", methods=["post", "get"])
+def show_this_blog(blog_id):
+    if not session.get("token") is None:
+        user = session.get('user')
+        blog = Blog.query.filter_by(blog_id=blog_id, blog_user_id=user["user_id"]).first()
+        if not blog:
+            flash("sorry no such blog found")
+        return render_template("show_this_blog.html", blog=blog, user=user)
+
+    else:
+        return redirect(url_for('page_error'))
+
+
+@app.route("/show_all_blogs", methods=["post", "get"])
+def show_all_blogs():
+    blogs = Blog.query.all()
+    output = []
+    for blog in blogs:
+        blog_data = {}
+        blog_data['blog_id'] = blog.blog_id
+        blog_data['blog_title'] = blog.blog_title
+        blog_data['blog_type'] = blog.blog_type
+        blog_data['blog_content'] = blog.blog_content
+        blog_data['blog_desc'] = blog.blog_desc
+        output.append(blog_data)
+    return render_template("show_all_blogs.html", blogs=output)
+
+
+@app.route("/show_chosen_blog/<blog_id>", methods=["post", "get"])
+def show_chosen_blog(blog_id):
+    blog = Blog.query.filter_by(blog_id=blog_id).first()
+    if not blog:
+        flash("sorry no such blog found")
+    return render_template("show_chosen_blog.html", blog=blog)
+
+
+@app.route('/delete_blog/<blog_id>', methods=['DELETE', 'GET', 'POST'])
+def delete_blog(blog_id):
+    if not session.get("token") is None:
+        user = session.get('user')
+        blog = Blog.query.filter_by(blog_id=blog_id, blog_user_id=user["user_id"]).first()
+        if not blog:
+            flash("No such blog found!")
+        db.session.delete(blog)
+        db.session.commit()
+        return redirect(url_for("show_my_blogs"))
+    else:
+        return redirect(url_for('page_error'))
+
+
+@app.route('/update_my_blog/<blog_id>', methods=['GET', 'POST', 'PUT'])
+def update_my_blog(blog_id):
+    if not session.get("token") is None:
+        user = session.get('user')
+        blog = Blog.query.filter_by(blog_id=blog_id, blog_user_id=user["user_id"]).first()
+        form = UpdateForm()
+        print("hi")
+        if not blog:
+            flash("No such blog found!")
+        if form.validate_on_submit():
+            if form.blog_title.data:
+                blog.blog_title = form.blog_title.data
+            if form.blog_type.data:
+                blog.blog_type = form.blog_type.data
+            if form.blog_content.data:
+                blog.blog_content = form.blog_content.data
+            if form.blog_desc.data:
+                blog.blog_desc = form.blog_desc.data
+            print(blog)
+            db.session.commit()
+            return redirect(url_for("show_my_blogs"))
+        return render_template("update.html", form=form, user=user)
+    else:
+        return redirect(url_for('page_error'))
+
+
+@app.route('/error', methods=['GET'])
+def page_error():
+    return render_template("error.html")

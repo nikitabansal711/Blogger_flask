@@ -28,10 +28,22 @@
             ><strong>WELCOME TO BLOGGER!</strong></a
           >
         </div>
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="{{ url_for('dashboard') }}">Create Blog</a>
+          </li>
+          <li><a href="{{ url_for('show_my_blogs') }}">See my blogs</a></li>
+          <li><a href="{{ url_for('show_all_blogs') }}">Show all blogs</a></li>
+        </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>
             <a href="{{ url_for('signup') }}"
               ><span class="glyphicon glyphicon-user"></span> Sign Up</a
+            >
+          </li>
+          <li>
+            <a href="{{ url_for('login') }}"
+              ><span class="glyphicon glyphicon-log-in"></span> Login</a
             >
           </li>
           <li>
@@ -47,34 +59,34 @@
       </div>
     </nav>
     <div
-      class="container-fluid text-center bg"
-      style="height: 600px;"
+      class="container-fluid"
+      style="background-color: whitesmoke; height: 100%;"
     >
-      <h1>Sign In</h1>
+      <h2>
+        Have fun reading buddy!
+      </h2>
       <br />
-      <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-          {{ form.username.label }}<br />
-          {{ form.username(size=32) }}
-        </p>
-        <p>
-          {{ form.password.label }}<br />
-          {{ form.password(size=32) }}
-        </p>
-        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-        <p>{{ form.submit() }}</p>
-      </form>
-      <div>
-        {% with messages = get_flashed_messages() %} {% if messages %} {% for
-        message in messages %}
-        <p>{{ message }}</p>
-        {% endfor %} {% endif %} {% endwith %}
-      </div>
-      {% endblock %}
+      {% for blog in blogs %}
+      <a href="{{ url_for('show_chosen_blog', blog_id= blog.blog_id) }}">
+        <div class="box">
+          <div>
+            <div class="content-flex"></div>
+            <div>
+              <h3 class="style-h3"><mark>{{ blog.blog_title }}</mark></h3>
+            </div>
+          </div>
+          <div class="content-flex">
+            <div>
+              <h4 class="style-sub-h3">{{ blog.blog_type }}</h4>
+            </div>
+            <br />
+          </div>
+        </div>
+      </a>
+      <br />
+      {% endfor %} {% endblock %}
       <div class="row">
-        <footer class="style-footer" style="margin-top: 200px;"
-        >
+        <footer class="style-footer">
           <div class="container-fluid">
             <h4><b>READ BLOGS! CREATE BLOGS!</b></h4>
             <br />

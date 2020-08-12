@@ -28,11 +28,16 @@
             ><strong>WELCOME TO BLOGGER!</strong></a
           >
         </div>
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="{{ url_for('dashboard') }}">Create Blog</a>
+          </li>
+          <li><a href="{{ url_for('show_my_blogs') }}">See my blogs</a></li>
+          <li><a href="{{ url_for('show_all_blogs') }}">Show all blogs</a></li>
+        </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="{{ url_for('signup') }}"
-              ><span class="glyphicon glyphicon-user"></span> Sign Up</a
-            >
+          <li class="style_li">
+            hi! {{ user.username }}
           </li>
           <li>
             <a href="{{ url_for('log_out') }}"
@@ -48,32 +53,39 @@
     </nav>
     <div
       class="container-fluid text-center bg"
-      style="height: 600px;"
+      style=" height: 600px;"
     >
-      <h1>Sign In</h1>
+      <h1>update your blog {{ user.username }}!</h1>
       <br />
-      <form action="" method="post" novalidate>
+      <form action="" method="POST" novalidate>
         {{ form.hidden_tag() }}
         <p>
-          {{ form.username.label }}<br />
-          {{ form.username(size=32) }}
+          {{ form.blog_title.label }}<br />
+          {{ form.blog_title }}
         </p>
         <p>
-          {{ form.password.label }}<br />
-          {{ form.password(size=32) }}
+          {{ form.blog_type.label }}<br />
+          {{ form.blog_type }}
         </p>
-        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+        <p>
+          {{ form.blog_desc.label }}<br />
+          {{ form.blog_desc }}
+        </p>
+        <p>
+          {{ form.blog_content.label }}<br />
+          {{ form.blog_content }}
+        </p>
         <p>{{ form.submit() }}</p>
+        <div>
+          {% with messages = get_flashed_messages() %} {% if messages %} {% for
+          message in messages %}
+          <p>{{ message }}</p>
+          {% endfor %} {% endif %} {% endwith %}
+        </div>
       </form>
-      <div>
-        {% with messages = get_flashed_messages() %} {% if messages %} {% for
-        message in messages %}
-        <p>{{ message }}</p>
-        {% endfor %} {% endif %} {% endwith %}
-      </div>
       {% endblock %}
       <div class="row">
-        <footer class="style-footer" style="margin-top: 200px;"
+        <footer class="style-footer"
         >
           <div class="container-fluid">
             <h4><b>READ BLOGS! CREATE BLOGS!</b></h4>

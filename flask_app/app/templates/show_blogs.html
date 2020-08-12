@@ -2,7 +2,7 @@
 <html>
   <head>
     <link
-      href="flask_app/app/static/styles/style.css"
+      href="{{url_for('static', filename='styles/style.css')}}"
       rel="stylesheet"
       type="text/css"
     />
@@ -33,63 +33,81 @@
             <a href="{{ url_for('dashboard') }}">Create Blog</a>
           </li>
           <li><a href="{{ url_for('show_my_blogs') }}">See my blogs</a></li>
-          <li><a href="">Show all blogs</a></li>
+          <li><a href="{{ url_for('show_all_blogs') }}">Show all blogs</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="{{ url_for('signup') }}"
+              ><span class="glyphicon glyphicon-user"></span> Sign Up</a
+            >
+          </li>
+          <li class="style_li">
+            hi! {{ user.username }}
+          </li>
+          <li>
+            <a href="{{ url_for('log_out') }}"
+              ><img
+                class="img-responsive"
+                src="{{url_for('static', filename='logout.png')}}"
+                height="20"
+                width="20"
+            /></a>
+          </li>
         </ul>
       </div>
     </nav>
     <div
       class="container-fluid"
-      style="background-color: whitesmoke; height: 100%;"
+      style="background-color: #F8F8FF; height: 100%;"
     >
-      <h2>Good job {{ user.username }}! here you see your blogs</h2>
+      <h2>
+        Good job <mark>{{ user.username }}!</mark> here you see your blogs
+      </h2>
       <br />
       {% for blog in blogs %}
-      <div
-        class="box"
-        style="
-          display: flex;
-          height: fit-content;
-          width: fit-content;
-          flex-direction: column;
-          margin-left: 10px;
-          box-shadow: 5px 10px 8px #888888;
-          margin-top: 20px;
-          background-color: yellowgreen;
-        "
-      >
-        Title: {{ blog.blog_title }}<br />
-        Type: {{ blog.blog_type }}<br />
-        Content: {{ blog.blog_type }}<br />
-        Description: {{ blog.blog_desc }}
-        <div class="flex_box" style="display: flex; justify-content: space-evenly;">
-        <img
-          class="img-responsive"
-          src="{{url_for('static', filename='delete.png')}}"
-          style="height: 20px; width: 20px; margin-top: 20px;"
-        /><img
-          class="img-responsive"
-          src="{{url_for('static', filename='edit.png')}}"
-          style="height: 20px; width: 20px; margin-top: 20px;"
-        />
+      <a href="{{ url_for('show_this_blog', blog_id= blog.blog_id) }}">
+        <div class="box">
+          <div>
+            <div class="content-flex"></div>
+            <div>
+              <h3 class="style-h3"><mark>{{ blog.blog_title }}</mark></h3>
+            </div>
+          </div>
+          <div class="content-flex">
+            <div>
+              <h4 class="style-sub-h3">{{ blog.blog_type }}</h4>
+            </div>
+            <br />
+          </div>
+          <div class="style-flex">
+            <a href="{{ url_for('delete_blog', blog_id= blog.blog_id) }}">
+              <img
+                class="img-responsive"
+                src="{{url_for('static', filename='delete.png')}}"
+                style="height: 30px; width: 30px; margin-top: 20px;"
+              />
+            </a>
+            <a href="{{ url_for('update_my_blog', blog_id= blog.blog_id) }}">
+              <img
+                class="img-responsive"
+                src="{{url_for('static', filename='edit.png')}}"
+                style="height: 30px; width: 30px; margin-top: 20px;"
+              />
+            </a>
+          </div>
         </div>
-      </div>
+      </a>
       <br />
-      {% endfor %} {% endblock %}
+      {% endfor %}
+      <div>
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for
+        message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %} {% endif %} {% endwith %}
+      </div>
+      {% endblock %}
       <div class="row">
-        <footer
-          style="
-            width: 100%;
-            height: fit-content;
-            max-width: top 10px;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: #2f4f4f;
-            color: black;
-            text-align: center;
-            position: relative;
-          "
-        >
+        <footer class="style-footer">
           <div class="container-fluid">
             <h4><b>READ BLOGS! CREATE BLOGS!</b></h4>
             <br />

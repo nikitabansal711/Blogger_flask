@@ -2,7 +2,7 @@
 <html>
   <head>
     <link
-      href="flask_app/app/static/styles/style.css"
+      href="{{url_for('static', filename='styles/style.css')}}"
       rel="stylesheet"
       type="text/css"
     />
@@ -33,15 +33,29 @@
             <a href="{{ url_for('dashboard') }}">Create Blog</a>
           </li>
           <li><a href="{{ url_for('show_my_blogs') }}">See my blogs</a></li>
-          <li><a href="">Show all blogs</a></li>
+          <li><a href="{{ url_for('show_all_blogs') }}">Explore</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="style_li">
+            hi! {{ user.username }}
+          </li>
+          <li>
+            <a href="{{ url_for('log_out') }}"
+              ><img
+                class="img-responsive"
+                src="{{url_for('static', filename='logout.png')}}"
+                height="20"
+                width="20"
+            /></a>
+          </li>
         </ul>
       </div>
     </nav>
     <div
-      class="container-fluid text-center"
-      style="background-color: #5f9ea0; height: 600px;"
+      class="container-fluid text-center bg"
+      style="height: 600px;"
     >
-      <h1>Create a blog buddy!</h1>
+      <h1>Create a blog {{ user.username }}!</h1>
       <br />
       <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
@@ -71,20 +85,7 @@
       </form>
       {% endblock %}
       <div class="row">
-        <footer
-          style="
-            width: 100%;
-            height: fit-content;
-            max-width: top 10px;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: #2f4f4f;
-            color: black;
-            text-align: center;
-            margin-top: 100px;
-          "
-        >
+        <footer class="style-footer">
           <div class="container-fluid">
             <h4><b>READ BLOGS! CREATE BLOGS!</b></h4>
             <br />
