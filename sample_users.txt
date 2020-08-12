@@ -1,5 +1,5 @@
 USERNAME   PASSWORD
 
-nikita      Nikita
+nikita      nikita
 Achintya    Achintya
 Rishabh     Rishabh
