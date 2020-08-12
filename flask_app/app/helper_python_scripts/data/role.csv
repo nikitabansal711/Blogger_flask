@@ -1,0 +1,3 @@
+"role_id","role_name","role_desc"
+1,"reader","as a reader you can only explore and read blogs"
+2,"blogger","as a blogger you need to login or signup and perform any CRUD operation"

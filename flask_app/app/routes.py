@@ -151,12 +151,16 @@ def show_all_blogs():
     blogs = Blog.query.all()
     output = []
     for blog in blogs:
+        user = User.query.filter_by(
+            user_id=blog.blog_user_id
+        ).first()
         blog_data = {}
         blog_data["blog_id"] = blog.blog_id
         blog_data["blog_title"] = blog.blog_title
         blog_data["blog_type"] = blog.blog_type
         blog_data["blog_content"] = blog.blog_content
         blog_data["blog_desc"] = blog.blog_desc
+        blog_data["username"] = user.user_name
         output.append(blog_data)
     return render_template("show_all_blogs.html", blogs=output)
 
@@ -165,9 +169,11 @@ def show_all_blogs():
 def show_chosen_blog(blog_id):
     """show choosen blog for a reader"""
     blog = Blog.query.filter_by(blog_id=blog_id).first()
+    user = User.query.filter_by(user_id=blog.blog_user_id).first()
     if not blog:
         flash("sorry no such blog found")
-    return render_template("show_chosen_blog.html", blog=blog)
+    return render_template("show_chosen_blog.html", blog=blog,
+                           username=user.user_name)
 
 
 @app.route("/delete_blog/<blog_id>", methods=["DELETE", "GET", "POST"])
@@ -196,7 +202,6 @@ def update_my_blog(blog_id):
             blog_id=blog_id, blog_user_id=user["user_id"]
         ).first()
         form = UpdateForm(obj=blog)
-        print("hi")
         if not blog:
             flash("No such blog found!")
         if form.validate_on_submit():

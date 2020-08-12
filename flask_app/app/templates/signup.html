@@ -20,7 +20,7 @@
     </title>
   </head>
   {% block content %}
-  <body style="margin-right: 10px; margin-left: 10px;">
+  <body>
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -34,44 +34,35 @@
               ><span class="glyphicon glyphicon-log-in"></span> Login</a
             >
           </li>
-          <li>
-            <a href="{{ url_for('log_out') }}"
-              ><img
-                class="img-responsive"
-                src="{{url_for('static', filename='logout.png')}}"
-                height="20"
-                width="20"
-            /></a>
-          </li>
         </ul>
       </div>
     </nav>
     <div
       class="container-fluid text-center"
-      style="background-color: #5f9ea0; height: 600px;"
+      style="background-color: black; height: 700px;"
     >
-      <h1>Sign Up</h1>
+      <h1 class="explore">Sign Up</h1>
       <br />
       <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
-          {{ form.user_name.label }}<br />
+          <div class="favorite">{{ form.user_name.label }}</div>
           {{ form.user_name }}
         </p>
         <p>
-          {{ form.user_email.label }}<br />
+          <div class="favorite">{{ form.user_email.label }}</div>
           {{ form.user_email }}
         </p>
         <p>
-          {{ form.user_address.label }}<br />
+          <div class="favorite">{{ form.user_address.label }}</div>
           {{ form.user_address }}
         </p>
         <p>
-          {{ form.user_mobile.label }}<br />
+         <div class="favorite"> {{ form.user_mobile.label }}</div>
           {{ form.user_mobile }}
         </p>
         <p>
-          {{ form.password.label }}<br />
+          <div class="favorite">{{ form.password.label }}</div>
           {{ form.password }}
         </p>
         <p>{{ form.submit() }}</p>

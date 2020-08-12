@@ -1,0 +1,4 @@
+"user_id","public_id","user_name","user_email","user_address","user_mobile","password"
+1,"4fe49850-58ab-4220-ab54-c405a893cf6c","nikita","nikita@gmail.com","ghaziabad","7982172764","sha256$LqsoTHov$a580d0e1a81e8b1c1bb3fa9ee7c808698f9449cf0943aa93a140e29e11b13428"
+2,"a2ba5a08-9bc9-4aa5-977f-c653a2327210","Rishabh","rishabh@gmail.com","Delhi","9811512659","sha256$7dvWgNEW$b280d381fcdb6d39657f65927692d887a92aef6c59c3e025b6f28ab6a683360e"
+3,"8034efec-3169-45fb-bb24-394e4b219174","Achintya","achintya@gmail.com","Delhi","1234567890","sha256$HTtI7mt3$42024db1abeea9bcbd6b44b2be2ce3de69a49ac3b49c965596bd38318d6dbdaa"

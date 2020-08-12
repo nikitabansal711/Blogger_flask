@@ -60,19 +60,19 @@
       <form action="" method="POST" novalidate>
         {{ form.hidden_tag() }}
         <p>
-          {{ form.blog_title.label }}<br />
+          <div class="favorite">{{ form.blog_title.label }}</div>
           {{ form.blog_title }}
         </p>
         <p>
-          {{ form.blog_type.label }}<br />
+          <div class="favorite">{{ form.blog_type.label }}</div>
           {{ form.blog_type }}
         </p>
         <p>
-          {{ form.blog_desc.label }}<br />
+          <div class="favorite">{{ form.blog_desc.label }}</div>
           {{ form.blog_desc }}
         </p>
         <p>
-          {{ form.blog_content.label }}<br />
+          <div class="favorite">{{ form.blog_content.label }}</div>
           {{ form.blog_content }}
         </p>
         <p>{{ form.submit() }}</p>
