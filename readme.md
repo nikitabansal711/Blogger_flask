@@ -28,7 +28,7 @@
 ---
 
  >#### Specify the postgres user
- * specify your postgres superuser username and password in the .env file in DATABASE_URL
+ * specify your postgres superuser username and password in the <strong>.env</strong> file in DATABASE_URL environment variable
  * else activate postgres using ```sudo -u postgres psql```
  * create one using command: ```CREATE USER temp WITH PASSWORD 'password';```
  * give the superuser access using: ```ALTER USER temp WITH SUPERUSER;```
@@ -37,9 +37,7 @@
  >#### Run the code
  * cd inside the helper_python_scripts
  * run helper_create_db.py to create database using command: ```python helper_create_db.py```
- * run the command ```flask db init``` to generate migrations directory
- * run the command ```flask db migrate``` to generate migration helper_python_scripts
- * run the command ```flask db upgrade``` to apply those scripts
+ * run the command ```flask db upgrade``` to apply the migration scripts
  * run the command: ```python helper_data_loader.py``` to load sample data into database
  * run the command: ```flask run``` to run the server 
  * Now you have the access to the BLOGGER website
