@@ -1,5 +1,5 @@
 
 ## Er diagram for the project:
-![Erdiagram](./erdiagram.png)
+![Erdiagram](images/erdiagram.png)
 
 ---
