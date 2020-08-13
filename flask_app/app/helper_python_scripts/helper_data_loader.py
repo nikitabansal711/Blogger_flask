@@ -1,6 +1,5 @@
 import csv
 import psycopg2
-
 from app import db
 from app.models import User, Role, Blog
 

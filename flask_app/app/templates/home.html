@@ -24,7 +24,9 @@
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="{{ url_for('home') }}"> <strong>Blogger</strong></a>
+          <a class="navbar-brand" href="{{ url_for('home') }}">
+            <strong>Blogger</strong></a
+          >
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
@@ -45,14 +47,14 @@
     <div
       class="container-fluid"
       style="height:800px; 
-      background-image: url({{url_for('static', filename= 'bg.jpeg')}});"
+      background-image: url({{url_for('static', filename= 'images/bg.jpeg')}});"
     >
       <div class="row text-center"></div>
       <br />
       <div class="row">
         <img
           class="img-responsive logo"
-          src="{{url_for('static', filename='blogger_logo.png')}}"
+          src="{{url_for('static', filename='images/blogger_logo.png')}}"
           align="middle"
         />
       </div>
@@ -62,7 +64,7 @@
         <a href="{{ url_for('show_all_blogs') }}">
           <img
             class="img-responsive"
-            src="{{url_for('static', filename='button.svg')}}"
+            src="{{url_for('static', filename='images/button.svg')}}"
             style="
               width: 80px;
               height: 80px;
