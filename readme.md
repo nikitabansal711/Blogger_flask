@@ -38,10 +38,11 @@
  * cd inside the helper_python_scripts
  * run helper_create_db.py to create database using command: ```python helper_create_db.py```
  * run the command ```flask db upgrade``` to apply the migration scripts
- * run the command: ```python helper_data_loader.py``` to load sample data into database
+ * run the command: ```python helper_data_loader.py``` to load sample data into the database
  * run the command: ```flask run``` to run the server 
  * Now you have the access to the BLOGGER website
  * Sample user credentials can be seen from <strong>sample_users.txt</strong> file to access their blogs and perfrom CRUD operations
+ * In order to perform delete and update operations, click on the dustbin and pencil icon respectively
  * run command: ```python helper_drop_db.py``` to drop database
 ---
 
