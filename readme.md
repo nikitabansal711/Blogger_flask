@@ -43,7 +43,7 @@
  * Now you have the access to the BLOGGER website
  * For better understanding of the site, have a look at the snapshots file present in the root directory
  * Sample user credentials can be seen from <strong>sample_users.txt</strong> file to access their blogs and perfrom CRUD operations
- * In order to perform delete and update operations, click on the dustbin and pencil icon respectively
+ * In order to perform delete and update operations, click on the dustbin and pencil icon respectively while accessing Blogger
  * run command: ```python helper_db_dropper.py``` to drop database
 ---
 
