@@ -2,6 +2,7 @@ import csv
 import psycopg2
 from app import db
 from app.models import User, Role, Blog
+from app.config import logger
 
 
 def load_data_users():
@@ -22,7 +23,7 @@ def load_data_users():
                 )
                 db.session.add(user)
             db.session.commit()
-            print("loaded data  to user table")
+            logger.info("loaded data  to user table")
     except (Exception, psycopg2.Error) as e:
         print(e)
 
@@ -44,7 +45,7 @@ def load_data_blogs():
                 )
                 db.session.add(blog)
             db.session.commit()
-            print("loaded data to blog table")
+            logger.info("loaded data to blog table")
 
     except psycopg2.Error as e:
         print(e)
@@ -62,7 +63,7 @@ def load_data_roles():
                 role = Role(role_id=record[0], role_name=record[1], role_desc=record[2])
                 db.session.add(role)
             db.session.commit()
-            print("loaded data to role table")
+            logger.info("loaded data to role table")
         db.session.close()
     except (Exception, psycopg2.Error) as e:
         print(e)
