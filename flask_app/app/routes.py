@@ -32,7 +32,8 @@ def login():
             token = jwt.encode(
                 {
                     "public_id": user.public_id,
-                    "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=30),
+                    "exp": datetime.datetime.utcnow() +
+                    datetime.timedelta(minutes=30),
                 },
                 app.config["SECRET_KEY"],
             )
@@ -62,7 +63,8 @@ def signup():
     """api for signup"""
     form = SignupForm()
     if form.validate_on_submit():
-        hashed_password = generate_password_hash(form.password.data, method="sha256")
+        hashed_password = generate_password_hash(
+            form.password.data, method="sha256")
         new_user = User(
             public_id=str(uuid.uuid4()),
             user_name=form.user_name.data,
@@ -125,7 +127,6 @@ def show_my_blogs():
             output.append(blog_data)
         return render_template("show_blogs.html", blogs=output, user=user)
     else:
-        flash("you are not logged in buddy!")
         return redirect(url_for("page_error"))
 
 
@@ -151,9 +152,7 @@ def show_all_blogs():
     blogs = Blog.query.all()
     output = []
     for blog in blogs:
-        user = User.query.filter_by(
-            user_id=blog.blog_user_id
-        ).first()
+        user = User.query.filter_by(user_id=blog.blog_user_id).first()
         blog_data = {}
         blog_data["blog_id"] = blog.blog_id
         blog_data["blog_title"] = blog.blog_title
@@ -172,8 +171,8 @@ def show_chosen_blog(blog_id):
     user = User.query.filter_by(user_id=blog.blog_user_id).first()
     if not blog:
         flash("sorry no such blog found")
-    return render_template("show_chosen_blog.html", blog=blog,
-                           username=user.user_name)
+    return render_template("show_chosen_blog.html",
+                           blog=blog, username=user.user_name)
 
 
 @app.route("/delete_blog/<blog_id>", methods=["DELETE", "GET", "POST"])
