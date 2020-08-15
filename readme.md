@@ -6,6 +6,7 @@
 >* Python
 >* Html, css for templates in frontend
 >* Database used: Postgresql
+>* The project uses PyJWT token based authentication and authorization
 ---
 
 ### To run the project:
