@@ -5,6 +5,9 @@ h1 {
 h3 {
   font-weight: bold;
 }
+body {
+  background-color: #adff2f;
+}
 .box {
   display: flex;
   height: fit-content;
@@ -129,4 +132,3 @@ h3 {
     font-family: "Lobster", cursive;
   }
 }
-
