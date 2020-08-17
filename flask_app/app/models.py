@@ -5,11 +5,11 @@ class User(db.Model):
     __tablename__ = 'user'
     user_id = db.Column(db.Integer, primary_key=True)
     public_id = db.Column(db.String(2000), unique=True)
-    user_name = db.Column(db.String(64))
-    user_email = db.Column(db.String(120))
-    user_address = db.Column(db.String(200))
-    user_mobile = db.Column(db.String(10))
-    password = db.Column(db.String(2000))
+    user_name = db.Column(db.String(64), nullable=False)
+    user_email = db.Column(db.String(120), nullable=False)
+    user_address = db.Column(db.String(200), nullable=False)
+    user_mobile = db.Column(db.String(10), nullable=False)
+    password = db.Column(db.String(2000), nullable=False)
     blogs = db.relationship('Blog', backref='author', lazy='dynamic')
 
     def __repr__(self):
@@ -19,10 +19,10 @@ class User(db.Model):
 class Blog(db.Model):
     __tablename__ = 'blog'
     blog_id = db.Column(db.Integer, primary_key=True)
-    blog_title = db.Column(db.String(120))
-    blog_type = db.Column(db.String(120))
-    blog_desc = db.Column(db.Text())
-    blog_content = db.Column(db.Text())
+    blog_title = db.Column(db.String(120), nullable=False)
+    blog_type = db.Column(db.String(120), nullable=False)
+    blog_desc = db.Column(db.Text(), nullable=False)
+    blog_content = db.Column(db.Text(), nullable=False)
     blog_user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
     def __repr__(self):

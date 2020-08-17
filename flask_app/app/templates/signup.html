@@ -1,108 +1,75 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>
-      BLOGGER
-    </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link
-      href="{{url_for('static', filename='styles/style.css')}}"
-      rel="stylesheet"
-      type="text/css"
-    />
-  </head>
+  {% extends "base.html" %}
+  {% block nav_extended %}
+  <ul class="nav navbar-nav navbar-right">
+    <li>
+      <a href="{{ url_for('login') }}"
+        ><span class="glyphicon glyphicon-log-in"></span> Login</a
+      >
+    </li>
+  </ul>
+  {% endblock %}
   {% block content %}
-  <body>
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="{{ url_for('home') }}"
-            ><strong>Blogger</strong></a
-          >
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="{{ url_for('login') }}"
-              ><span class="glyphicon glyphicon-log-in"></span> Login</a
-            >
-          </li>
-        </ul>
-      </div>
-    </nav>
     <div
       class="container-fluid text-center"
       style="background-color: black; height: 700px;"
     >
-      <h1 class="explore">Sign Up</h1>
-      <br />
-      <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-          <div class="favorite">{{ form.user_name.label }}</div>
-          {{ form.user_name }}
-        </p>
-        <p>
-          <div class="favorite">{{ form.user_email.label }}</div>
-          {{ form.user_email }}
-        </p>
-        <p>
-          <div class="favorite">{{ form.user_address.label }}</div>
-          {{ form.user_address }}
-        </p>
-        <p>
-         <div class="favorite"> {{ form.user_mobile.label }}</div>
-          {{ form.user_mobile }}
-        </p>
-        <p>
-          <div class="favorite">{{ form.password.label }}</div>
-          {{ form.password }}
-        </p>
-        <p>{{ form.submit() }}</p>
-        <div>
-          {% with messages = get_flashed_messages() %} {% if messages %} {% for
-          message in messages %}
-          <p>{{ message }}</p>
-          {% endfor %} {% endif %} {% endwith %}
-        </div>
-      </form>
-      {% endblock %}
-      <div class="row">
-        <footer class="style-footer"
-        >
-          <div class="container-fluid">
-            <br />
-            <br />
-            <p>
-              <i
-                >A blog is an online diary or journal located on a website. The
-                content of a blog typically includes text, pictures, videos,
-                animated GIFs and even scans from old physical offline diaries
-                or journals and other hard copy documents. Since a blog can
-                exist merely for personal use, sharing information with an
-                exclusive group or to engage the public, a blog owner can set
-                their blog for private or public access.Blog content can appear
-                as posts on one continuous streaming page or posts on individual
-                pages reachable through one or more pages set up in a list-style
-                format as post title links, excerpts and related tags.
-              </i>
-            </p>
-            <small>Copyright &copy; Nikita Bansal</small>
-            <br />
-            <small>Contact us : 0120-88797987</small>
-            <br />
-            <small>Delhi, Panchsheel</small>
-          </div>
-        </footer>
+    <h1 class="explore">Sign Up</h1>
+    <br />
+  <form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+      <div class="favorite">{{ form.user_name.label }}</div>
+      {{ form.user_name }}<br>
+      <div>
+      {% for error in form.user_name.errors %}
+      <span class="style-p">[{{ error }}]</span>
+      {% endfor %}
       </div>
+    </p>
+    <p>
+      <div class="favorite">{{ form.user_email.label }}</div>
+      {{ form.user_email }}<br>
+      <div>
+      {% for error in form.user_email.errors %}
+      <span class="style-p">[{{ error }}]</span>
+      {% endfor %}
+      </div>
+    </p>
+    <p>
+      <div class="favorite">{{ form.user_address.label }}</div>
+      {{ form.user_address }}<br>
+      <div>
+      {% for error in form.user_address.errors %}
+      <span class="style-p">[{{ error }}]</span>
+      {% endfor %}
+      </div>
+    </p>
+    <p>
+      <div class="favorite"> {{ form.user_mobile.label }}</div>
+      {{ form.user_mobile }}<br>
+      <div>
+      {% for error in form.user_mobile.errors %}
+      <span class="style-p">[{{ error }}]</span>
+      {% endfor %}
+      </div>
+    </p>
+    <p>
+      <div class="favorite">{{ form.password.label }}</div>
+      {{ form.password }}<br>
+      <div>
+      {% for error in form.password.errors %}
+      <span class="style-p">[{{ error }}]</span>
+      {% endfor %}
+      </div>
+    </p>
+    <br>
+    <p>{{ form.submit() }}</p>
+    <div>
+      {% with messages = get_flashed_messages() %} {% if messages %} {% for
+      message in messages %}
+      <p class="style-p2">{{ message }}</p>
+      {% endfor %} {% endif %} {% endwith %}
     </div>
-  </body>
-</html>
+  </form>
+</div>
+  {% endblock %}

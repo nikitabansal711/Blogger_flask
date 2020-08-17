@@ -1,136 +1,77 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>
-      BLOGGER
-    </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link
-      href="{{url_for('static', filename='styles/style.css')}}"
-      rel="stylesheet"
-      type="text/css"
-    />
-  </head>
-  {% block content %}
-  <body>
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="{{ url_for('home') }}"
-            ><strong>Blogger</strong></a
-          >
-        </div>
-        <ul class="nav navbar-nav">
-          <li class="active">
-            <a href="{{ url_for('dashboard') }}">Create Blog</a>
-          </li>
-          <li><a href="{{ url_for('show_my_blogs') }}">See my blogs</a></li>
-          <li><a href="{{ url_for('show_all_blogs') }}">Explore</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="{{ url_for('signup') }}"
-              ><span class="glyphicon glyphicon-user"></span> Sign Up</a
-            >
-          </li>
-          <li class="style_li">
-            hi! {{ user.username }}
-          </li>
-          <li>
-            <a href="{{ url_for('log_out') }}"
-              ><img
-                class="img-responsive"
-                src="{{url_for('static', filename='images/logout.png')}}"
-                height="20"
-                width="20"
-            /></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <div class="container-fluid" style="background-color: black; height: 100%;">
-      <h2 style="color: whitesmoke;">
-        Good job <mark>{{ user.username }}!</mark> here you see your blogs
-      </h2>
-      <br />
-      {% for blog in blogs %}
-      <a href="{{ url_for('show_this_blog', blog_id= blog.blog_id) }}">
-        <div class="box">
-          <div>
-            <div class="content-flex"></div>
-            <div>
-              <h3 class="style-sub-h3">{{ blog.blog_title }}</h3>
-            </div>
-          </div>
-          <div class="content-flex">
-            <div>
-              <h4 class="choosen-block">{{ blog.blog_type }}</h4>
-            </div>
-            <br />
-          </div>
-          <div class="style-flex">
-            <a href="{{ url_for('delete_blog', blog_id= blog.blog_id) }}">
-              <img
-                class="img-responsive"
-                src="{{url_for('static', filename='images/delete.png')}}"
-                style="height: 30px; width: 30px; margin-top: 20px;"
-              />
-            </a>
-            <a href="{{ url_for('update_my_blog', blog_id= blog.blog_id) }}">
-              <img
-                class="img-responsive"
-                src="{{url_for('static', filename='images/edit.png')}}"
-                style="height: 30px; width: 30px; margin-top: 20px;"
-              />
-            </a>
-          </div>
-        </div>
-      </a>
-      <br />
-      {% endfor %}
+{% extends "base.html" %} {% block nav_extended %}
+<ul class="nav navbar-nav">
+  <li class="active">
+    <a href="{{ url_for('dashboard') }}">Create Blog</a>
+  </li>
+  <li><a href="{{ url_for('show_my_blogs') }}">See my blogs</a></li>
+  <li><a href="{{ url_for('show_all_blogs') }}">Explore</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+  <li>
+    <a href="{{ url_for('signup') }}"
+      ><span class="glyphicon glyphicon-user"></span> Sign Up</a
+    >
+  </li>
+  <li class="style_li">
+    hi! {{ user }}
+  </li>
+  <li>
+    <a href="{{ url_for('log_out') }}"
+      ><img
+        class="img-responsive"
+        src="{{url_for('static', filename='images/logout.png')}}"
+        height="20"
+        width="20"
+    /></a>
+  </li>
+</ul>
+
+{% endblock %} {% block content %}
+<div class="container-fluid" style="background-color: black; height: 100%;">
+  <h2 style="color: whitesmoke;">
+    Good job <mark>{{ user }}!</mark> here you see your blogs
+  </h2>
+  <br />
+  {% for blog in blogs %}
+  <a href="{{ url_for('show_this_blog', blog_id= blog.blog_id) }}">
+    <div class="box">
       <div>
-        {% with messages = get_flashed_messages() %} {% if messages %} {% for
-        message in messages %}
-        <p>{{ message }}</p>
-        {% endfor %} {% endif %} {% endwith %}
+        <div class="content-flex"></div>
+        <div>
+          <h3 class="style-sub-h3">{{ blog.blog_title }}</h3>
+        </div>
       </div>
-      {% endblock %}
-      <div class="row">
-        <footer class="style-footer">
-          <div class="container-fluid">
-            <br />
-            <br />
-            <p>
-              <i
-                >A blog is an online diary or journal located on a website. The
-                content of a blog typically includes text, pictures, videos,
-                animated GIFs and even scans from old physical offline diaries
-                or journals and other hard copy documents. Since a blog can
-                exist merely for personal use, sharing information with an
-                exclusive group or to engage the public, a blog owner can set
-                their blog for private or public access.Blog content can appear
-                as posts on one continuous streaming page or posts on individual
-                pages reachable through one or more pages set up in a list-style
-                format as post title links, excerpts and related tags.
-              </i>
-            </p>
-            <small>Copyright &copy; Nikita Bansal</small>
-            <br />
-            <small>Contact us : 0120-88797987</small>
-            <br />
-            <small>Delhi, Panchsheel</small>
-          </div>
-        </footer>
+      <div class="content-flex">
+        <div>
+          <h4 class="choosen-block">{{ blog.blog_type }}</h4>
+        </div>
+        <br />
+      </div>
+      <div class="style-flex">
+        <a href="{{ url_for('delete_blog', blog_id= blog.blog_id) }}">
+          <img
+            class="img-responsive"
+            src="{{url_for('static', filename='images/delete.png')}}"
+            style="height: 30px; width: 30px; margin-top: 20px;"
+          />
+        </a>
+        <a href="{{ url_for('update_my_blog', blog_id= blog.blog_id) }}">
+          <img
+            class="img-responsive"
+            src="{{url_for('static', filename='images/edit.png')}}"
+            style="height: 30px; width: 30px; margin-top: 20px;"
+          />
+        </a>
       </div>
     </div>
-  </body>
-</html>
+  </a>
+  <br />
+  {% endfor %}
+  <div>
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for
+    message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %} {% endif %} {% endwith %}
+  </div>
+</div>
+{% endblock %}

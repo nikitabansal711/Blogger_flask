@@ -23,36 +23,15 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(user_name=form.username.data).first()
         if not user:
-            return make_response(
-                "Could not verify",
-                401,
-                {"WWW-Authenticate": 'Basic realm="Login required!"'},
-            )
+            flash("Wrong credentials provided!")
         if check_password_hash(user.password, form.password.data):
-            token = jwt.encode(
-                {
-                    "public_id": user.public_id,
-                    "exp": datetime.datetime.utcnow() +
-                    datetime.timedelta(minutes=30),
-                },
-                app.config["SECRET_KEY"],
-            )
-            jsonify({"token": token.decode("UTF-8")})
-            user_dict = {
-                "username": user.user_name,
-                "user_id": user.user_id,
-                "user_email": user.user_email,
-                "user_mobile": user.user_email,
-            }
-            session["token"] = token
-            session["user"] = user_dict
+            session["username"] = user.user_name
+            session["user_id"] = user.user_id
+            session["user_email"] = user.user_email
+            session["user_mobile"] = user.user_mobile
             return redirect(url_for("dashboard"))
 
-        return make_response(
-            "Could not verify",
-            401,
-            {"WWW-Authenticate": 'Basic realm="Login required!"'},
-        )
+        flash("Wrong credentials provided!")
 
     return render_template("login.html", title="Sign In", form=form)
 
@@ -75,17 +54,15 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
         flash("New user created with username {}".format(new_user.user_name))
-    else:
-        flash("You need to fill all the details!")
     return render_template("signup.html", title="Sign In", form=form)
 
 
 @app.route("/dashboard", methods=["post", "get"])
 def dashboard():
     """takes the user to dashboard"""
-    if not session.get("token") is None:
+    if not session.get("user_id") is None:
         form = BlogForm()
-        user = session.get("user")
+        user = session.get("username")
         if form.validate_on_submit():
             new_blog = Blog(
                 blog_title=form.blog_title.data,
@@ -106,16 +83,17 @@ def dashboard():
 @app.route("/log_out", methods=["post", "get"])
 def log_out():
     """enables user to log out"""
-    session.pop("token", None)
+    session.pop("user_id", None)
     return redirect(url_for("home"))
 
 
 @app.route("/show_my_blogs", methods=["post", "get"])
 def show_my_blogs():
     """for listing all the blogs of current user only"""
-    if not session.get("token") is None:
-        user = session.get("user")
-        blogs = Blog.query.filter_by(blog_user_id=user["user_id"]).all()
+    if not session.get("user_id") is None:
+        user_id = session.get("user_id")
+        user = session.get("username")
+        blogs = Blog.query.filter_by(blog_user_id=user_id).all()
         output = []
         for blog in blogs:
             blog_data = {}
@@ -133,10 +111,11 @@ def show_my_blogs():
 @app.route("/show_this_blog/<blog_id>", methods=["post", "get"])
 def show_this_blog(blog_id):
     """for showing the detail of current selected blog only"""
-    if not session.get("token") is None:
-        user = session.get("user")
+    if not session.get("user_id") is None:
+        user_id = session.get("user_id")
+        user = session.get("username")
         blog = Blog.query.filter_by(
-            blog_id=blog_id, blog_user_id=user["user_id"]
+            blog_id=blog_id, blog_user_id=user_id
         ).first()
         if not blog:
             flash("sorry no such blog found")
@@ -178,10 +157,10 @@ def show_chosen_blog(blog_id):
 @app.route("/delete_blog/<blog_id>", methods=["DELETE", "GET", "POST"])
 def delete_blog(blog_id):
     """deletes the blog"""
-    if not session.get("token") is None:
-        user = session.get("user")
+    if not session.get("user_id") is None:
+        user_id = session.get("user_id")
         blog = Blog.query.filter_by(
-            blog_id=blog_id, blog_user_id=user["user_id"]
+            blog_id=blog_id, blog_user_id=user_id
         ).first()
         if not blog:
             flash("No such blog found!")
@@ -195,25 +174,22 @@ def delete_blog(blog_id):
 @app.route("/update_my_blog/<blog_id>", methods=["GET", "POST", "PUT"])
 def update_my_blog(blog_id):
     """update the blog"""
-    if not session.get("token") is None:
-        user = session.get("user")
+    if not session.get("user_id") is None:
+        user_id = session.get("user_id")
+        user = session.get("username")
         blog = Blog.query.filter_by(
-            blog_id=blog_id, blog_user_id=user["user_id"]
+            blog_id=blog_id, blog_user_id=user_id
         ).first()
         form = UpdateForm(obj=blog)
         if not blog:
             flash("No such blog found!")
         if form.validate_on_submit():
-            if form.blog_title.data:
-                blog.blog_title = form.blog_title.data
-            if form.blog_type.data:
-                blog.blog_type = form.blog_type.data
-            if form.blog_content.data:
-                blog.blog_content = form.blog_content.data
-            if form.blog_desc.data:
-                blog.blog_desc = form.blog_desc.data
-            print(blog)
+            blog.blog_title = form.blog_title.data
+            blog.blog_type = form.blog_type.data
+            blog.blog_content = form.blog_content.data
+            blog.blog_desc = form.blog_desc.data
             db.session.commit()
+            flash("Blog succesfully updated!")
             return redirect(url_for("show_my_blogs"))
         return render_template("update.html", form=form, user=user)
     else:
