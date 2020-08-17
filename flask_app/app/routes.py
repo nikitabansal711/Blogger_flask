@@ -46,7 +46,6 @@ def login():
             }
             session["token"] = token
             session["user"] = user_dict
-            print("session set")
             return redirect(url_for("dashboard"))
 
         return make_response(
