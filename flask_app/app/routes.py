@@ -75,7 +75,8 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
         flash("New user created with username {}".format(new_user.user_name))
-
+    else:
+        flash("You need to fill all the details!")
     return render_template("signup.html", title="Sign In", form=form)
 
 
