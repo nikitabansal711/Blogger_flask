@@ -7,7 +7,6 @@ flake8==3.8.3
 SQLAlchemy-Utils==0.36.7
 flask-wtf==0.14.3
 email-validator==1.1.1
-pyJWT==1.7.1
 
 
 

@@ -1,12 +1,11 @@
 # comprises of all the routes required in the project
-import datetime
 import uuid
-import jwt
-from flask import render_template, redirect, url_for, flash, session
-from flask import jsonify, make_response
-from werkzeug.security import check_password_hash, generate_password_hash
+
 from app import app, db
 from app.forms import LoginForm, SignupForm, BlogForm, UpdateForm
+from flask import render_template, redirect, url_for, flash, session
+from werkzeug.security import check_password_hash, generate_password_hash
+
 from .models import User, Blog
 
 
