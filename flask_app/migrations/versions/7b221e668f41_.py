@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 306776eb4527
+Revision ID: 7b221e668f41
 Revises: 
-Create Date: 2020-08-11 19:59:39.147824
+Create Date: 2020-08-18 14:00:21.058940
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '306776eb4527'
+revision = '7b221e668f41'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -28,23 +28,21 @@ def upgrade():
     op.create_table('user',
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('public_id', sa.String(length=2000), nullable=True),
-    sa.Column('user_name', sa.String(length=64), nullable=True),
-    sa.Column('user_email', sa.String(length=120), nullable=True),
-    sa.Column('user_address', sa.String(length=200), nullable=True),
-    sa.Column('user_mobile', sa.String(length=10), nullable=True),
-    sa.Column('password', sa.String(length=2000), nullable=True),
+    sa.Column('user_name', sa.String(length=64), nullable=False),
+    sa.Column('user_email', sa.String(length=120), nullable=False),
+    sa.Column('user_address', sa.String(length=200), nullable=False),
+    sa.Column('user_mobile', sa.String(length=10), nullable=False),
+    sa.Column('password', sa.String(length=2000), nullable=False),
     sa.PrimaryKeyConstraint('user_id'),
     sa.UniqueConstraint('public_id'),
-    sa.UniqueConstraint('user_email'),
-    sa.UniqueConstraint('user_mobile'),
     sa.UniqueConstraint('user_name')
     )
     op.create_table('blog',
     sa.Column('blog_id', sa.Integer(), nullable=False),
-    sa.Column('blog_title', sa.String(length=120), nullable=True),
-    sa.Column('blog_type', sa.String(length=120), nullable=True),
-    sa.Column('blog_desc', sa.Text(), nullable=True),
-    sa.Column('blog_content', sa.Text(), nullable=True),
+    sa.Column('blog_title', sa.String(length=120), nullable=False),
+    sa.Column('blog_type', sa.String(length=120), nullable=False),
+    sa.Column('blog_desc', sa.Text(), nullable=False),
+    sa.Column('blog_content', sa.Text(), nullable=False),
     sa.Column('blog_user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['blog_user_id'], ['user.user_id'], ),
     sa.PrimaryKeyConstraint('blog_id')

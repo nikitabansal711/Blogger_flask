@@ -5,7 +5,7 @@ class User(db.Model):
     __tablename__ = 'user'
     user_id = db.Column(db.Integer, primary_key=True)
     public_id = db.Column(db.String(2000), unique=True)
-    user_name = db.Column(db.String(64), nullable=False)
+    user_name = db.Column(db.String(64), nullable=False, unique=True)
     user_email = db.Column(db.String(120), nullable=False)
     user_address = db.Column(db.String(200), nullable=False)
     user_mobile = db.Column(db.String(10), nullable=False)

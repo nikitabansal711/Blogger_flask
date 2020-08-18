@@ -7,6 +7,7 @@ from flask import render_template, redirect, url_for, flash, session
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from .models import User, Blog
+from app.config import logger
 
 
 @app.route("/", methods=["post", "get"])
@@ -38,22 +39,26 @@ def login():
 @app.route("/signup", methods=["post", "get"])
 def signup():
     """api for signup"""
-    form = SignupForm()
-    if form.validate_on_submit():
-        hashed_password = generate_password_hash(
-            form.password.data, method="sha256")
-        new_user = User(
-            public_id=str(uuid.uuid4()),
-            user_name=form.user_name.data,
-            user_email=form.user_email.data,
-            user_address=form.user_address.data,
-            user_mobile=form.user_mobile.data,
-            password=hashed_password,
-        )
-        db.session.add(new_user)
-        db.session.commit()
-        flash("New user created with username {}".format(new_user.user_name))
-    return render_template("signup.html", title="Sign In", form=form)
+    try:
+        form = SignupForm()
+        if form.validate_on_submit():
+            hashed_password = generate_password_hash(
+                form.password.data, method="sha256")
+            new_user = User(
+                public_id=str(uuid.uuid4()),
+                user_name=form.user_name.data,
+                user_email=form.user_email.data,
+                user_address=form.user_address.data,
+                user_mobile=form.user_mobile.data,
+                password=hashed_password,
+            )
+            db.session.add(new_user)
+            db.session.commit()
+            flash("New user created with username {}".format(
+                new_user.user_name))
+        return render_template("signup.html", title="Sign In", form=form)
+    except (Exception, TypeError)as e:
+        logger.info(e)
 
 
 @app.route("/dashboard", methods=["post", "get"])

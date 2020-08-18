@@ -3,7 +3,14 @@ from wtforms import SubmitField, IntegerField
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms import TextAreaField
 from wtforms.fields.html5 import EmailField
-from wtforms.validators import DataRequired, Email, Length
+from wtforms.validators import DataRequired, Email, Length, ValidationError
+from .models import User
+
+
+def validate_username(form, field):
+    user = User.query.filter_by(user_name=field.data)
+    if user:
+        raise ValidationError('Please try another username')
 
 
 class LoginForm(FlaskForm):
@@ -19,7 +26,8 @@ class LoginForm(FlaskForm):
 
 class SignupForm(FlaskForm):
     user_name = StringField(
-        "Username", validators=[DataRequired(message="Enter Your Name Please")]
+        "Username", validators=[DataRequired(message="Enter Your Name Please"),
+                                validate_username]
     )
     user_email = EmailField(
         "Email address",
