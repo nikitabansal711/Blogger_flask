@@ -13,7 +13,6 @@ def load_data_users():
             next(reader)  # This skips the 1st row which is the header.
             for record in reader:
                 user = User(
-                    user_id=record[0],
                     public_id=record[1],
                     user_name=record[2],
                     user_email=record[3],
@@ -36,7 +35,6 @@ def load_data_blogs():
             next(reader)
             for record in reader:
                 blog = Blog(
-                    blog_id=record[0],
                     blog_title=record[1],
                     blog_type=record[2],
                     blog_desc=record[3],
