@@ -67,13 +67,14 @@ def dashboard():
     if not session.get("user_id") is None:
         form = BlogForm()
         user = session.get("username")
+        user_id = session.get("user_id")
         if form.validate_on_submit():
             new_blog = Blog(
                 blog_title=form.blog_title.data,
                 blog_type=form.blog_type.data,
                 blog_desc=form.blog_desc.data,
                 blog_content=form.blog_content.data,
-                blog_user_id=user["user_id"],
+                blog_user_id=user_id,
             )
             db.session.add(new_blog)
             db.session.commit()
