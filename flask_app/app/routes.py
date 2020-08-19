@@ -78,8 +78,7 @@ def dashboard():
             )
             db.session.add(new_blog)
             db.session.commit()
-            flash("New blog created with title {}".format(new_blog.blog_title))
-
+            return redirect(url_for("show_my_blogs"))
         return render_template("dashboard.html", form=form, user=user)
     else:
         return redirect(url_for("page_error"))
