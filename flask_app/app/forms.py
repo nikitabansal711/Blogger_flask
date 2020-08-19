@@ -7,12 +7,6 @@ from wtforms.validators import DataRequired, Email, Length, ValidationError
 from .models import User
 
 
-def validate_username(form, field):
-    user = User.query.filter_by(user_name=field.data)
-    if user:
-        raise ValidationError('Please try another username')
-
-
 class LoginForm(FlaskForm):
     username = StringField(
         "Username", validators=[DataRequired(message="Enter Your Name Please")]
@@ -26,9 +20,14 @@ class LoginForm(FlaskForm):
 
 class SignupForm(FlaskForm):
     user_name = StringField(
-        "Username", validators=[DataRequired(message="Enter Your Name Please"),
-                                validate_username]
+        "Username", validators=[DataRequired(message="Enter Your Name Please")]
     )
+
+    def validate_username(form, field):
+        user = User.query.filter_by(user_name=field.data)
+        if user:
+            raise ValidationError("Please try another username")
+
     user_email = EmailField(
         "Email address",
         validators=[DataRequired(message="Enter Your Email Please"), Email()],
